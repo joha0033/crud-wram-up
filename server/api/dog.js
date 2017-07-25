@@ -1,9 +1,18 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const queries = require('../database/queries');
 
 /* GET dog page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  queries.getAllDogs().then(dogs => {
+    res.json(dogs)
+  })
 });
+
+router.post('/new',(req, res, next)=> {
+  queries.addDog(req.body).then(dog => {
+    res.json(dog)
+  })
+})
 
 module.exports = router;

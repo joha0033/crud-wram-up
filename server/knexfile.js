@@ -1,9 +1,12 @@
 // Update with your config settings.
-
+require('dotenv').config()
 module.exports = {
-
   development: {
-    client: 'postgresql',
+    client: 'pg',
     connection: 'postgres://localhost/dog'
+  },
+  production:{
+    client:'pg',
+    connection: process.env.DATABASE_URL + "?ssl=true"
   }
 };
